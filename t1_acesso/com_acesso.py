@@ -1,6 +1,7 @@
 # com_acesso.py
 import json
 import os
+from dotenv import load_dotenv
 import requests
 from abc import ABC, abstractmethod
 
@@ -27,6 +28,7 @@ class RemoteConfig(ConfigRepository):
 
 def get_repo_from_env() -> ConfigRepository:
     """Factory: seleciona o backend pela variável CONFIG_BACKEND."""
+    load_dotenv()
     backend = os.getenv("CONFIG_BACKEND", "local")
     if backend == "local":
         return LocalConfig()
